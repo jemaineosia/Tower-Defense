@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 950167596210299781}
   - component: {fileID: 8989046813055192233}
   - component: {fileID: 2395860542608408145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_Fast
   m_TagString: Enemy
   m_Icon: {fileID: 0}

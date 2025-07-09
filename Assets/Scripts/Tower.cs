@@ -1,62 +1,107 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
     [SerializeField] private Transform currentEnemy;
 
+    [SerializeField] protected float attackCooldown = 1;
+    protected float lastTimeAttacked;
+
     [Header("Tower Settings")]
-    [SerializeField] private Transform towerHead;
-    [SerializeField] private float rotationSpeed = 5f;
-    [SerializeField] private float attackRange = 1.5f;
-    //[SerializeField] private float attackCooldown = 1f;
-    //[SerializeField] private float damage = 10f;
-    //private float attackTimer = 0f;
-    //private Enemy currentEnemyScript;
+    [SerializeField] protected Transform towerHead;
+    [SerializeField] protected float rotationSpeed = 10f;
+    private bool canRotate;
+
+    [SerializeField] protected float attackRange = 2.5f;
+    [SerializeField] protected LayerMask enemyLayer;
 
     private Quaternion defaultRotation;
 
-    private void Start()
+    protected virtual void Awake()
     {
-        defaultRotation = towerHead.rotation;
+        
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        if (currentEnemy != null)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, currentEnemy.position);
-            if (distanceToEnemy <= attackRange)
-            {
-                RotateTowardsEnemy();
-            }
-            else
-            {
-                ReturnToDefaultRotation();
-            }
+        if(currentEnemy == null)
+        { 
+            currentEnemy = FindRandomEnemyWithinRange();
+            return;
         }
-        else
+
+        if (CanAttack())
+            Attack();
+
+        if (Vector3.Distance(currentEnemy.position, transform.position) > attackRange)
+            currentEnemy = null;
+        
+        RotateTowardsEnemy();
+    }
+
+    protected virtual void Attack()
+    {
+        Debug.Log("Attacking " + currentEnemy.name);
+    }
+
+    protected bool CanAttack()
+    {
+        if (Time.time > lastTimeAttacked + attackCooldown)
         {
-            ReturnToDefaultRotation();
+            lastTimeAttacked = Time.time;
+            return true;
         }
+
+        return false;
     }
 
-    private void ReturnToDefaultRotation()
+    protected Transform FindRandomEnemyWithinRange()
     {
-        var rotation = Quaternion.Slerp(towerHead.rotation, defaultRotation, rotationSpeed * Time.deltaTime).eulerAngles;
-        towerHead.rotation = Quaternion.Euler(rotation);
+        List<Transform> possibleTargets = new List<Transform>();
+        Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
+
+        foreach (Collider enemy in enemiesInRange)
+        {
+            possibleTargets.Add(enemy.transform);
+        }
+        
+        int randomIndex = Random.Range(0, possibleTargets.Count);
+
+        // If no enemies in range, return null
+        if (possibleTargets.Count <= 0)
+            return null;
+
+
+        return possibleTargets[randomIndex];
     }
 
-    private void RotateTowardsEnemy()
+    public void EnableRotation(bool enable)
     {
+        canRotate = enable;
+    }
+
+    protected virtual void RotateTowardsEnemy()
+    {
+        if(!canRotate)
+            return;
+
+        if (currentEnemy == null)
+            return;
+
         Vector3 directionToEnemy = currentEnemy.position - towerHead.position;
         Quaternion lookRotation = Quaternion.LookRotation(directionToEnemy);
-        var rotation = Quaternion.Slerp(towerHead.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
+        var rotation = Quaternion.Lerp(towerHead.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
         
         towerHead.rotation = Quaternion.Euler(rotation);
     }
 
-    private void OnDrawGizmos()
+    protected Vector3 DirectionToEnemyFrom(Transform startPoint)
+    { 
+        return (currentEnemy.position - startPoint.position).normalized;
+    }
+
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, attackRange);
