@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +12,13 @@ public class WaveDetails
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private WaveDetails currentWave;
+    [Space]
     [SerializeField] private Transform respawn;
     [SerializeField] private float spawnCooldown = 5f;
     private float spawnTimer;
 
-    [SerializeField] private List<GameObject> enemiesToCreate;
-    
+    private List<GameObject> enemiesToCreate;
+
     [Header("Enemies Prefabs")]
     [SerializeField] private GameObject basicEnemy;
     [SerializeField] private GameObject fastEnemy;
@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
         spawnTimer -= Time.deltaTime;
 
         // Check if it's time to spawn
-        if (spawnTimer <= 0f)
+        if (spawnTimer <= 0f && enemiesToCreate.Count > 0)
         {
             CreateEnemy();
             // Reset the timer
@@ -45,11 +45,11 @@ public class EnemyManager : MonoBehaviour
     private void CreateEnemy()
     {
         // Check if we need to generate a new wave
-        if (enemiesToCreate.Count == 0)
-        {
-            enemiesToCreate = NewEnemyWave();
-            return;
-        }
+        //if (enemiesToCreate.Count == 0)
+        //{
+        //    enemiesToCreate = NewEnemyWave();
+        //    return;
+        //}
 
         // Select random enemy from the list
         int randomIndex = Random.Range(0, enemiesToCreate.Count);
@@ -64,7 +64,7 @@ public class EnemyManager : MonoBehaviour
 
     private List<GameObject> NewEnemyWave()
     {
-         List<GameObject> newEnemyList = new List<GameObject>();
+        List<GameObject> newEnemyList = new List<GameObject>();
         for (int i = 0; i < currentWave.basicEnemy; i++)
         {
             newEnemyList.Add(basicEnemy);

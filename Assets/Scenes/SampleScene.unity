@@ -1474,11 +1474,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWave:
-    basicEnemy: 3
-    fastEnemy: 5
+    basicEnemy: 10
+    fastEnemy: 4
   respawn: {fileID: 630984187687666611}
   spawnCooldown: 3
-  enemiesToCreate: []
   basicEnemy: {fileID: 1316941563267394389, guid: 456ac916daf825a45b880922f4b5af6e, type: 3}
   fastEnemy: {fileID: 8089502457608881478, guid: 014105eba8275fb4d8b5e56e01b999b5, type: 3}
 --- !u!4 &398069766
