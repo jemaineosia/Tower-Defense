@@ -4852,7 +4852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEnemy: {fileID: 0}
-  attackCooldown: 1
+  attackCooldown: 2
   towerHead: {fileID: 1961140113771352483}
   rotationSpeed: 10
   attackRange: 2.5
@@ -4874,6 +4874,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackVisuals: {fileID: 29359620}
   attackVisualDuration: 0.1
+  meshRenderer: {fileID: 5239959159751856331}
+  material: {fileID: 0}
+  currentIntensity: 0
+  maxIntensity: 150
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0.047058824, g: 0.7607843, b: 0.7921569, a: 1}
 --- !u!23 &1301890478521612528
 MeshRenderer:
   m_ObjectHideFlags: 0

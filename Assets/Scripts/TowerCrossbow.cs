@@ -19,6 +19,7 @@ public class TowerCrossbow : Tower
             Debug.DrawLine(gunPoint.position, hitInfo.point, Color.red);
 
             crossbowVisuals.PlayAttackVFX(gunPoint.position, hitInfo.point);
+            crossbowVisuals.PlayReloadVFX(attackCooldown);
         }
     }
 
