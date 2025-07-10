@@ -1448,14 +1448,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280da220f74a35b49bc150e9891ec2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnemy: {fileID: 0}
-  attackCooldown: 2
+  attackCooldown: 1.2
+  enemyPriorityType: 1
   towerHead: {fileID: 6795096825665470900}
   rotationSpeed: 10
   attackRange: 2.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  damage: 10
   gunPoint: {fileID: 5726622390294788897}
 --- !u!114 &8730228648944501223
 MonoBehaviour:

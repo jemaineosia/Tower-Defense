@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private Transform currentEnemy;
+    private Enemy currentEnemy;
 
     [SerializeField] protected float attackCooldown = 1;
     protected float lastTimeAttacked;
 
     [Header("Tower Settings")]
+    [SerializeField] protected EnemyType enemyPriorityType = EnemyType.None;
     [SerializeField] protected Transform towerHead;
     [SerializeField] protected float rotationSpeed = 10f;
     private bool canRotate;
@@ -16,7 +17,11 @@ public class Tower : MonoBehaviour
     [SerializeField] protected float attackRange = 2.5f;
     [SerializeField] protected LayerMask enemyLayer;
 
-    private Quaternion defaultRotation;
+    [Space]
+    [Tooltip("Enabling this allows tower to change target between attacks")]
+    [SerializeField] private bool dynamicTargetChange = true;
+    private float targetCheckInterval = 0.1f;
+    private float lastTimeCheckedTarget;
 
     protected virtual void Awake()
     {
@@ -25,20 +30,34 @@ public class Tower : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(currentEnemy == null)
+        UpdateTargetIfNeeded();
+
+        if (currentEnemy == null)
         { 
-            currentEnemy = FindRandomEnemyWithinRange();
+            currentEnemy = FindEnemyWithinRange();
             return;
         }
 
         if (CanAttack())
             Attack();
 
-        if (Vector3.Distance(currentEnemy.position, transform.position) > attackRange)
+        if (Vector3.Distance(currentEnemy.CenterPoint(), transform.position) > attackRange)
             currentEnemy = null;
         
         RotateTowardsEnemy();
     }
+
+    private void UpdateTargetIfNeeded()
+    {
+        if (!dynamicTargetChange)
+            return;
+
+        if(Time.time > lastTimeCheckedTarget + targetCheckInterval)
+        {
+            lastTimeCheckedTarget = Time.time;
+            currentEnemy = FindEnemyWithinRange();
+        }
+    }   
 
     protected virtual void Attack()
     {
@@ -56,24 +75,50 @@ public class Tower : MonoBehaviour
         return false;
     }
 
-    protected Transform FindRandomEnemyWithinRange()
+    protected Enemy FindEnemyWithinRange()
     {
-        List<Transform> possibleTargets = new List<Transform>();
+        List<Enemy> priorityTargets = new List<Enemy>();
+        List<Enemy> possibleTargets = new List<Enemy>();
         Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
 
         foreach (Collider enemy in enemiesInRange)
         {
-            possibleTargets.Add(enemy.transform);
+            Enemy newEnemy = enemy.GetComponent<Enemy>();
+            EnemyType enemyType = newEnemy.GetEnemyType();
+
+            if (enemyType == enemyPriorityType)
+                priorityTargets.Add(newEnemy);
+            else
+                possibleTargets.Add(newEnemy);
         }
-        
-        int randomIndex = Random.Range(0, possibleTargets.Count);
+      
+        if (priorityTargets.Count > 0)
+            return GetMostAdvancedEnemy(priorityTargets);
 
-        // If no enemies in range, return null
-        if (possibleTargets.Count <= 0)
-            return null;
+        if(possibleTargets.Count > 0)
+            return GetMostAdvancedEnemy(possibleTargets);
 
+        return null;
+    }
 
-        return possibleTargets[randomIndex];
+    private static Enemy GetMostAdvancedEnemy(List<Enemy> possibleTargets)
+    {
+        Enemy mostAdvancedEnemy = null;
+        float minRemaintingDistance = float.MaxValue;
+
+        foreach (Enemy enemy in possibleTargets)
+        {
+            if (enemy == null)
+                continue;
+            float remainingDistance = enemy.DistanceToFinishLine();
+            if (remainingDistance < minRemaintingDistance)
+            {
+                minRemaintingDistance = remainingDistance;
+                mostAdvancedEnemy = enemy;
+            }
+        }
+
+        return mostAdvancedEnemy;
     }
 
     public void EnableRotation(bool enable)
@@ -89,7 +134,7 @@ public class Tower : MonoBehaviour
         if (currentEnemy == null)
             return;
 
-        Vector3 directionToEnemy = currentEnemy.position - towerHead.position;
+        Vector3 directionToEnemy = DirectionToEnemyFrom(towerHead);
         Quaternion lookRotation = Quaternion.LookRotation(directionToEnemy);
         var rotation = Quaternion.Lerp(towerHead.rotation, lookRotation, rotationSpeed * Time.deltaTime).eulerAngles;
         
@@ -98,7 +143,7 @@ public class Tower : MonoBehaviour
 
     protected Vector3 DirectionToEnemyFrom(Transform startPoint)
     { 
-        return (currentEnemy.position - startPoint.position).normalized;
+        return (currentEnemy.CenterPoint() - startPoint.position).normalized;
     }
 
     protected virtual void OnDrawGizmos()
