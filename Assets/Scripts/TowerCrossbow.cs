@@ -5,6 +5,7 @@ public class TowerCrossbow : Tower
     private CrossbowVisuals crossbowVisuals;
 
     [Header("Crossbow Settings")]
+    [SerializeField] private int damage;
     [SerializeField] private Transform gunPoint;
 
     override protected void Attack()
@@ -20,6 +21,16 @@ public class TowerCrossbow : Tower
 
             crossbowVisuals.PlayAttackVFX(gunPoint.position, hitInfo.point);
             crossbowVisuals.PlayReloadVFX(attackCooldown);
+
+            IDamageable damageable = hitInfo.collider.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.LogWarning("Hit object does not implement IDamageable: " + hitInfo.collider.name);
+            }
         }
     }
 
