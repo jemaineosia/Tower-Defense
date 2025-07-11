@@ -1,22 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossbowVisuals : MonoBehaviour
+public class Crossbow_Visuals : MonoBehaviour
 {
-    private TowerCrossbow towerCrossbow;
+    private Enemy myEnemy;
 
     [SerializeField] private LineRenderer attackVisuals;
-    [SerializeField] private float attackVisualDuration = 0.1f;
+    [SerializeField] private float attackVisualDuration = .1f;
+
 
     [Header("Glowing Visuals")]
     [SerializeField] private MeshRenderer meshRenderer;
     private Material material;
+
     [Space]
-    private float currentIntensity;
     [SerializeField] private float maxIntensity = 150;
+    private float currentIntensity;
     [Space]
     [SerializeField] private Color startColor;
     [SerializeField] private Color endColor;
+
 
     [Header("Rotor Visuals")]
     [SerializeField] private Transform rotor;
@@ -28,12 +32,13 @@ public class CrossbowVisuals : MonoBehaviour
     [SerializeField] private LineRenderer frontString_R;
 
     [Space]
+
     [SerializeField] private Transform frontStartPoint_L;
     [SerializeField] private Transform frontStartPoint_R;
     [SerializeField] private Transform frontEndPoint_L;
     [SerializeField] private Transform frontEndPoint_R;
 
-    [Header("Black Glow String")]
+    [Header("Back Glow String")]
     [SerializeField] private LineRenderer backString_L;
     [SerializeField] private LineRenderer backString_R;
 
@@ -47,28 +52,17 @@ public class CrossbowVisuals : MonoBehaviour
 
     private void Awake()
     {
-        towerCrossbow = GetComponent<TowerCrossbow>();
-        if (attackVisuals == null)
-        {
-            Debug.LogError("Attack visuals LineRenderer is not assigned in " + gameObject.name);
-        }
-
         material = new Material(meshRenderer.material);
         meshRenderer.material = material;
+
         UpdateMaterialsOnLineRenderers();
         StartCoroutine(ChangeEmission(1));
-
     }
 
     private void UpdateMaterialsOnLineRenderers()
     {
-        foreach (LineRenderer lr in lineRenderers)
+        foreach (var lr in lineRenderers)
         {
-            if (lr == null)
-            {
-                Debug.LogError("A LineRenderer is not assigned in " + gameObject.name);
-            }
-
             lr.material = material;
         }
     }
@@ -77,14 +71,21 @@ public class CrossbowVisuals : MonoBehaviour
     {
         UpdateEmissionColor();
         UpdateStrings();
+        UpdateAttackVisualsIfNeeded();
+    }
+
+    private void UpdateAttackVisualsIfNeeded()
+    {
+        if (attackVisuals.enabled && myEnemy != null)
+            attackVisuals.SetPosition(1, myEnemy.CenterPoint());
     }
 
     private void UpdateStrings()
     {
-        UpdateStringVisual(frontString_R, frontStartPoint_L, frontEndPoint_L);
-        UpdateStringVisual(frontString_L, frontStartPoint_R, frontEndPoint_R);
-        UpdateStringVisual(backString_R, backStartPoint_L, backEndPoint_L);
-        UpdateStringVisual(backString_L, backStartPoint_R, backEndPoint_R);
+        UpdateStringVisual(frontString_L, frontStartPoint_L, frontEndPoint_L);
+        UpdateStringVisual(frontString_R, frontStartPoint_R, frontEndPoint_R);
+        UpdateStringVisual(backString_L, backStartPoint_L, backEndPoint_L);
+        UpdateStringVisual(backString_R, backStartPoint_R, backEndPoint_R);
     }
 
     private void UpdateEmissionColor()
@@ -93,7 +94,7 @@ public class CrossbowVisuals : MonoBehaviour
         material.SetColor("_EmissionColor", emissionColor * currentIntensity);
     }
 
-    public void PlayReloadVFX(float duration)
+    public void PlayReloaxVFX(float duration)
     {
         float newDuration = duration / 2;
 
@@ -101,34 +102,34 @@ public class CrossbowVisuals : MonoBehaviour
         StartCoroutine(UpdateRotorPosition(newDuration));
     }
 
-    public void PlayAttackVFX(Vector3 startPosition, Vector3 endPosition)
+    public void PlayAttackVFX(Vector3 startPoint, Vector3 endPoint, Enemy newEnemy)
     {
-        StartCoroutine(VFXCoroutine(startPosition,endPosition));
+        StartCoroutine(VFXCoroutione(startPoint,endPoint,newEnemy));
     }
 
-    private IEnumerator VFXCoroutine(Vector3 startPosition, Vector3 endPosition)
+    private IEnumerator VFXCoroutione(Vector3 startPoint, Vector3 endPoint,Enemy newEnemy)
     {
-        towerCrossbow.EnableRotation(false);
+        myEnemy = newEnemy;
 
         attackVisuals.enabled = true;
-        attackVisuals.SetPosition(0, startPosition);
-        attackVisuals.SetPosition(1, endPosition);
+        attackVisuals.SetPosition(0, startPoint);
+        attackVisuals.SetPosition(1, endPoint);
 
         yield return new WaitForSeconds(attackVisualDuration);
         attackVisuals.enabled = false;
-        towerCrossbow.EnableRotation(true);
     }
 
     private IEnumerator ChangeEmission(float duration)
     {
-        float startTime = Time.time;
+        float startTime = Time.time; 
         float startIntensity = 0;
 
-        while (Time.time - startTime < duration)
+        // Do something repeatedly until the duration has passed
+        while (Time.time - startTime < duration) 
         {
-            // calculate the intensity based on the elapsed time
-            float t = (Time.time - startTime) / duration;
-            currentIntensity = Mathf.Lerp(startIntensity, maxIntensity, t);
+            // Calculates the proportion of the duration that has elapsed since the start of the coroutine.
+            float tValue = (Time.time - startTime) / duration;
+            currentIntensity = Mathf.Lerp(startIntensity, maxIntensity, tValue);
             yield return null;
         }
 
@@ -141,8 +142,8 @@ public class CrossbowVisuals : MonoBehaviour
 
         while (Time.time - startTime < duration)
         {
-            float t = (Time.time - startTime) / duration;
-            rotor.position = Vector3.Lerp(rotorUnloaded.position, rotorLoaded.position, t);
+            float tValue = (Time.time - startTime) / duration;
+            rotor.position = Vector3.Lerp(rotorUnloaded.position, rotorLoaded.position, tValue);
             yield return null;
         }
 
@@ -152,6 +153,6 @@ public class CrossbowVisuals : MonoBehaviour
     private void UpdateStringVisual(LineRenderer lineRenderer, Transform startPoint, Transform endPoint)
     {
         lineRenderer.SetPosition(0, startPoint.position);
-        lineRenderer.SetPosition(1, endPoint.position);
+        lineRenderer.SetPosition(1,endPoint.position);
     }
 }

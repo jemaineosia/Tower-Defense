@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141937942840399990}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.000000020003965, y: 0.07122007, z: 0.112860695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -96,11 +96,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 141937942840399990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
-  rotationSpeed: 3.5
+  rotationSpeed: 4
 --- !u!1 &968502774717777262
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1316941563267394389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df5bcb337f8f874aab73ab5e79294c5, type: 3}
+  m_Script: {fileID: 11500000, guid: abccdda0c55300447814936eaa4ddc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
@@ -473,11 +473,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5048067954783636717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
-  rotationSpeed: 3.5
+  rotationSpeed: 4
 --- !u!1 &8821483098920664088
 GameObject:
   m_ObjectHideFlags: 0

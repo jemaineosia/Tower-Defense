@@ -182,11 +182,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4016436541402262465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 1, y: 0, z: 0}
-  rotationSpeed: 3.5
+  rotationSpeed: 4
 --- !u!1 &4404748624841370304
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,10 +384,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8089502457608881478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df5bcb337f8f874aab73ab5e79294c5, type: 3}
+  m_Script: {fileID: 11500000, guid: abccdda0c55300447814936eaa4ddc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 1
+  enemyType: 0
   centerPoint: {fileID: 2091810033802497689}
   healthPoints: 4
   turnSpeed: 10
