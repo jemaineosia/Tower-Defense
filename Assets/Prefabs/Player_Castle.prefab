@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 5979480445774214478}
   - component: {fileID: 5007836183557809938}
   - component: {fileID: 7472437368320645583}
+  - component: {fileID: 607797597260437795}
   m_Layer: 0
   m_Name: castle_spinner_4
   m_TagString: Untagged
@@ -199,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249360190251117725}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.2967546, y: 0.36049744, z: -0.2976599}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -268,7 +269,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1249360190251117725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationVector: {x: 0, y: -1, z: 0}
+  rotationSpeed: 4
+--- !u!114 &607797597260437795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249360190251117725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 0, y: -1, z: 0}
@@ -460,6 +475,7 @@ GameObject:
   - component: {fileID: 2626755153212795774}
   - component: {fileID: 7793885613125660935}
   - component: {fileID: 6543292780562941217}
+  - component: {fileID: 6530251642630396130}
   m_Layer: 0
   m_Name: castle_spinner_3
   m_TagString: Untagged
@@ -475,7 +491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3459983115612529414}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.29675463, y: 0.36049744, z: -0.2976599}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -544,7 +560,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3459983115612529414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationVector: {x: 0, y: 1, z: 0}
+  rotationSpeed: 4
+--- !u!114 &6530251642630396130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459983115612529414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 0, y: 1, z: 0}
@@ -997,6 +1027,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 785968426376864188}
+  - component: {fileID: 8940745729695390412}
+  - component: {fileID: 8804532983999231256}
   m_Layer: 0
   m_Name: Player_Castle
   m_TagString: Untagged
@@ -1030,6 +1062,39 @@ Transform:
   - {fileID: 7609218701471747080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8940745729695390412
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864803294995806186}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.38, y: 2.5, z: 2.19}
+  m_Center: {x: 0, y: 0.57, z: 0}
+--- !u!114 &8804532983999231256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864803294995806186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d985e2b7583ad66468d9eb40484d53da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5379825985251058848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,6 +1623,7 @@ GameObject:
   - component: {fileID: 433043667010033149}
   - component: {fileID: 6058649297038922805}
   - component: {fileID: 1543665851352919748}
+  - component: {fileID: 834827743704453175}
   m_Layer: 0
   m_Name: castle_spinner_2
   m_TagString: Untagged
@@ -1573,7 +1639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7617025723808075480}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.29675457, y: 0.36049744, z: 0.29766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1642,7 +1708,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7617025723808075480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationVector: {x: 0, y: 1, z: 0}
+  rotationSpeed: 4
+--- !u!114 &834827743704453175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617025723808075480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 0, y: 1, z: 0}
@@ -1831,6 +1911,7 @@ GameObject:
   - component: {fileID: 2799573106740116239}
   - component: {fileID: 4307183577409782880}
   - component: {fileID: 6873399999141270337}
+  - component: {fileID: 6867337771625680270}
   m_Layer: 0
   m_Name: castle_spinner_1
   m_TagString: Untagged
@@ -1846,13 +1927,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8502013021066486133}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.460742, z: 0, w: 0.88753414}
   m_LocalPosition: {x: 0.29675463, y: 0.36049744, z: 0.29765996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 785968426376864188}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -54.87, z: 0}
 --- !u!33 &2799573106740116239
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1915,7 +1996,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8502013021066486133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13a1776b8a62be4e80eb6beade6c653, type: 3}
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationVector: {x: 0, y: -1, z: 0}
+  rotationSpeed: 4
+--- !u!114 &6867337771625680270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502013021066486133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce96d33c898d0f4eafcacbaf6e52849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationVector: {x: 0, y: -1, z: 0}
