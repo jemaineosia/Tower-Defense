@@ -8,11 +8,17 @@ public class WaveDetails
     public int fastEnemy;
 }
 
-public class EnemyManager : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
     public bool waveCompleted;
+    public float timeBetweenWaves = 10f;
+    public float wavetimer;
+
     [SerializeField] private WaveDetails[] levelWaves;
     private int waveIndex;
+    
+    private float chechInterval = 0.5f;
+    private float nextCheckTime;
 
     [Header("Enemy Prefabs")]
     [SerializeField] private GameObject basicEnemy;
@@ -32,10 +38,45 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        HandleWaveCompletion();
+        HandleWaveTiming();
+    }
+
+    private void HandleWaveCompletion()
+    {
+        if (!ReadyToCheck())
+            return;
+
         if (waveCompleted == false && AllEnemiesDefeated())
         {
             waveCompleted = true;
+            wavetimer = timeBetweenWaves;
         }
+    }
+
+    private void HandleWaveTiming()
+    {
+        if (waveCompleted)
+        {
+            wavetimer -= Time.deltaTime;
+            if (wavetimer <= 0)
+            {
+                SetupNextWave();
+
+                wavetimer = timeBetweenWaves;
+            }
+        }
+    }
+
+    public void ForceNextWave()
+    {
+        if(!AllEnemiesDefeated())
+        { 
+            Debug.Log("Cannot force next wave, there are still active enemies.");
+            return; 
+        }
+
+        SetupNextWave();
     }
 
     [ContextMenu("Setup Next Wave")]
@@ -102,5 +143,15 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return true; // All enemies defeated
+    }
+
+    private bool ReadyToCheck()
+    {
+        if (Time.time >= nextCheckTime)
+        {
+            nextCheckTime = Time.time + chechInterval;
+            return true;
+        }
+        return false;
     }
 }

@@ -391,7 +391,7 @@ MonoBehaviour:
   centerPoint: {fileID: 2091810033802497689}
   healthPoints: 4
   turnSpeed: 10
-  waypoints: []
+  myWaypoints: []
 --- !u!195 &950167596210299781
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.17
-  m_Speed: 2
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 99
   m_AngularSpeed: 120
