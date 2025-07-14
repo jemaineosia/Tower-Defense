@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class EnemyPortal : MonoBehaviour
 {
-
-    [SerializeField] private List<Waypoint> waypointList;
     [SerializeField] private float spawnCooldown;
     private float spawnTimer;
+    [Space]
+    [SerializeField] private List<Waypoint> waypointList;
 
-    public List<GameObject> enemiesToCreate;
+    private List<GameObject> enemiesToCreate = new List<GameObject>();
+    private List<GameObject> activeEnemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -39,14 +40,10 @@ public class EnemyPortal : MonoBehaviour
         GameObject newEnemy = Instantiate(randomEnemy, transform.position, Quaternion.identity);
 
         Enemy enemyScript = newEnemy.GetComponent<Enemy>();
-        if (enemyScript != null)
-        {
-            enemyScript.SetupEnemy(waypointList);
-        }
-        else
-        {
-            Debug.LogWarning("Enemy script not found on the instantiated enemy.");
-        }
+        enemyScript.SetupEnemy(waypointList, this);
+
+        activeEnemies.Add(newEnemy);
+
     }
 
     private GameObject GetRandomEnemy()
@@ -58,20 +55,36 @@ public class EnemyPortal : MonoBehaviour
 
         return choosenEnemy;
     }
+    public void AddEnemy(GameObject enemyToAdd) => enemiesToCreate.Add(enemyToAdd);
 
-    public List<GameObject> GetEnemyList() => enemiesToCreate;
+    public void RemoveActiveEnemy(GameObject enemyToRemove)
+    {
+        if (activeEnemies.Contains(enemyToRemove))
+        {
+            activeEnemies.Remove(enemyToRemove);
+        }
+        else
+        {
+            Debug.LogWarning($"Enemy {enemyToRemove.name} not found in active enemies list.");
+        }
+    }
+
+    public List<GameObject> GetActiveEnemies() => activeEnemies;
 
     private void CollectWaypoints()
     {
         waypointList = new List<Waypoint>();
 
-        foreach(Transform child in transform)
+        Debug.Log($"Portal {gameObject.name} collecting waypoints:");
+        foreach (Transform child in transform)
         {
             Waypoint waypoint = child.GetComponent<Waypoint>();
             if (waypoint != null)
             {
                 waypointList.Add(waypoint);
+                Debug.Log($"Added waypoint: {child.name}");
             }
         }
+        Debug.Log($"Total waypoints collected: {waypointList.Count}");
     }
 }
