@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,7 +16,7 @@ public class Enemy : MonoBehaviour , IDamagable
     [Header("Movement")]
     [SerializeField] private float turnSpeed = 10;
 
-    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private List<Transform> myWaypoints;
     private int waypointIndex;
 
     private float totalDistance;
@@ -26,14 +28,16 @@ public class Enemy : MonoBehaviour , IDamagable
         agent.avoidancePriority = Mathf.RoundToInt(agent.speed * 10);
     }
 
-    private void Start()
+   public void SetupEnemy(List<Waypoint> newWaypoints)
     {
-        waypoints = FindFirstObjectByType<WaypointManager>().GetWaypoints();
+        myWaypoints = new List<Transform>();
+        foreach (var point in newWaypoints)
+        {
+            myWaypoints.Add(point.transform);
+        }
 
         CollectTotalDistance();
     }
-
-   
 
     private void Update()
     {
@@ -51,9 +55,9 @@ public class Enemy : MonoBehaviour , IDamagable
 
      private void CollectTotalDistance()
     {
-        for (int i = 0; i < waypoints.Length - 1; i++)
+        for (int i = 0; i < myWaypoints.Count - 1; i++)
         {
-            float distance = Vector3.Distance(waypoints[i].position, waypoints[i + 1].position);
+            float distance = Vector3.Distance(myWaypoints[i].position, myWaypoints[i + 1].position);
             totalDistance = totalDistance + distance;
         }
     }
@@ -72,7 +76,7 @@ public class Enemy : MonoBehaviour , IDamagable
     private Vector3 GetNextWaypoint()
     {
         // Check if the waypoint index is beyond the last waypoint
-        if (waypointIndex >= waypoints.Length)
+        if (waypointIndex >= myWaypoints.Count)
         {
             // If true, return the agent's current position, effectively stopping it
             // Uncomment the line below to loop the waypoints
@@ -81,12 +85,12 @@ public class Enemy : MonoBehaviour , IDamagable
         }
 
         // Get the current target point from the waypoints array
-        Vector3 targetPoint = waypoints[waypointIndex].position;
+        Vector3 targetPoint = myWaypoints[waypointIndex].position;
 
         // If this is not the first waypoint, calculate the distance from the previous waypoint
         if (waypointIndex > 0)
         {
-            float distance = Vector3.Distance(waypoints[waypointIndex].position, waypoints[waypointIndex - 1].position);
+            float distance = Vector3.Distance(myWaypoints[waypointIndex].position, myWaypoints[waypointIndex - 1].position);
             // Subtract this distance from the total distance
             totalDistance = totalDistance - distance;
         }
