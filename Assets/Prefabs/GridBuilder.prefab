@@ -75,6 +75,13 @@ MonoBehaviour:
   tileBridgeField: {fileID: 3249743761600554159, guid: 036141f3e465d7b43be377e284ec1723, type: 3}
   tileBridgeRoad: {fileID: 4103267345806814640, guid: 226af45d7e01c534d90a890c26bb0086, type: 3}
   tileBridgeSideway: {fileID: 5199237285599939830, guid: 14634e49576a80a47bb43aeaeb51b7ed, type: 3}
+  snowTile: {fileID: 8401237519115838545, guid: 862c5fe67d1239244ae73760f7957e66, type: 3}
+  snowTileDirt: {fileID: 3946657588276059960, guid: 83bacb918b74d754db1643037dbfc683, type: 3}
+  snowTileStraight: {fileID: 7934768044721260907, guid: 8277b182dc23dba4a8826257ef25ea8d, type: 3}
+  snowTileCorner: {fileID: 6604152226017789830, guid: 58f0d649e1bd280478a802ad189e23b6, type: 3}
+  snowTileCrystal: {fileID: 2856156981012968778, guid: d3109bae03493174a91b52276d5231fb, type: 3}
+  snowTileTreeQuad: {fileID: 5680102796743458611, guid: 0d8d29b36c2d6d645aa92949c9789370, type: 3}
+  snowTileTree: {fileID: 7571871273536522942, guid: 81ce34ae50aab3640809bd010afaa8fb, type: 3}
 --- !u!114 &6686239293707615251
 MonoBehaviour:
   m_ObjectHideFlags: 0
