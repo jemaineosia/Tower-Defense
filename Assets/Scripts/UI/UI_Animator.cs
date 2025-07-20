@@ -26,4 +26,29 @@ public class UI_Animator : MonoBehaviour
             yield return null;
         }
     }
+
+    public void ChangeScale(RectTransform transform, float newScale, float duration = .25f)
+    {
+        RectTransform rectTransform = transform.GetComponent<RectTransform>();
+        StartCoroutine(ChangeScaleCo(rectTransform, newScale, duration));
+    }
+
+    private IEnumerator ChangeScaleCo(RectTransform rectTransform, float newScale, float duration = .25f)
+    {
+        float time = 0;
+        Vector3 initialScale = rectTransform.localScale;
+        Vector3 targetScale = new Vector3(newScale, newScale, newScale);
+
+        while (time < duration)
+        {
+            float t = time / duration;
+            rectTransform.localScale = Vector3.Lerp(initialScale, targetScale, t);
+            
+            time += Time.deltaTime;
+            
+            yield return null;
+        }
+
+        rectTransform.localScale = targetScale;
+    }
 }
