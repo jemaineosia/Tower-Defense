@@ -15820,6 +15820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 620607653}
+  - component: {fileID: 620607656}
   - component: {fileID: 620607655}
   - component: {fileID: 620607654}
   m_Layer: 5
@@ -15852,7 +15853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &620607654
@@ -15893,6 +15894,20 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
+--- !u!114 &620607656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620607652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c06ce84ca7756046817f79d43fb3161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yPositionOffset: -250
+  isActive: 0
 --- !u!1 &626630280
 GameObject:
   m_ObjectHideFlags: 0
@@ -25001,7 +25016,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &968415731
@@ -35260,7 +35275,7 @@ MonoBehaviour:
   healthPointsText: {fileID: 1885779410}
   CurrencyText: {fileID: 378861538}
   waveText: {fileID: 1452911617}
-  waveTimeOffset: 180
+  waveTimerOffset: 220
 --- !u!1 &1351649311
 GameObject:
   m_ObjectHideFlags: 0
