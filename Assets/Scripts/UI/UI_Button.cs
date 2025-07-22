@@ -1,13 +1,19 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UI_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     private UI_Animator uiAnim;
     private RectTransform rectTransform;
 
     [SerializeField] private float showcaseScale = 1.1f;
     [SerializeField] private float scaleUpDuration = 0.25f;
+
+    private Coroutine scaleCoroutine;
+    [Space]
+    [SerializeField] private UI_TextBlinkEffect myTextBlinkEffect;
+
+
     private void Awake()
     {
         uiAnim = GetComponentInParent<UI_Animator>();
@@ -16,14 +22,28 @@ public class UI_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        uiAnim.ChangeScale(rectTransform, showcaseScale, scaleUpDuration);
+        if (scaleCoroutine != null)
+            StopCoroutine(scaleCoroutine);
+        
+        scaleCoroutine = StartCoroutine(uiAnim.ChangeScaleCo(rectTransform, showcaseScale, scaleUpDuration));
+
+        if (myTextBlinkEffect != null)
+            myTextBlinkEffect.EnableBlink(false);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        uiAnim.ChangeScale(rectTransform, 1, scaleUpDuration);
+        if (scaleCoroutine != null)
+            StopCoroutine(scaleCoroutine);
+
+        scaleCoroutine = StartCoroutine(uiAnim.ChangeScaleCo(rectTransform, 1, scaleUpDuration));
+
+        if (myTextBlinkEffect != null)
+            myTextBlinkEffect.EnableBlink(true);
     }
 
-
-
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        rectTransform.localScale = Vector3.one;
+    }
 }

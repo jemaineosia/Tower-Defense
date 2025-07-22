@@ -1,11 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Animator : MonoBehaviour
 {
     public void ChangePosition(Transform transform, Vector3 offset, float duration = 0.1f)
     {
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
+
         StartCoroutine(ChangePosition(rectTransform, offset, duration));
     }
 
@@ -18,22 +20,22 @@ public class UI_Animator : MonoBehaviour
 
         while (time < duration)
         {
-            float t = time / duration;
-            rectTransform.anchoredPosition = Vector3.Lerp(initialPosition, targetPosition, t);
-            
+            rectTransform.anchoredPosition = Vector3.Lerp(initialPosition, targetPosition, time / duration);
             time += Time.deltaTime;
-            
+
             yield return null;
         }
+
+        rectTransform.anchoredPosition = targetPosition;
     }
 
-    public void ChangeScale(RectTransform transform, float newScale, float duration = .25f)
+    public void ChangeScale(RectTransform transform, float targetScale, float duration = .25f)
     {
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
-        StartCoroutine(ChangeScaleCo(rectTransform, newScale, duration));
+        StartCoroutine(ChangeScaleCo(rectTransform, targetScale, duration));
     }
 
-    private IEnumerator ChangeScaleCo(RectTransform rectTransform, float newScale, float duration = .25f)
+    public IEnumerator ChangeScaleCo(RectTransform rectTransform, float newScale, float duration = .25f)
     {
         float time = 0;
         Vector3 initialScale = rectTransform.localScale;
@@ -41,14 +43,34 @@ public class UI_Animator : MonoBehaviour
 
         while (time < duration)
         {
-            float t = time / duration;
-            rectTransform.localScale = Vector3.Lerp(initialScale, targetScale, t);
-            
-            time += Time.deltaTime;
-            
+            rectTransform.localScale = Vector3.Lerp(initialScale, targetScale, time / duration);
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
 
         rectTransform.localScale = targetScale;
+    }
+
+    public void ChangeColor(Image image, float targetAlpha, float duration = .25f)
+    {
+        StartCoroutine(ChangeColorCo(image, targetAlpha, duration));
+    }
+
+    public IEnumerator ChangeColorCo(Image image, float targetAlpha, float duration = .25f)
+    {
+        float time = 0;
+        Color currentColor = image.color;
+        float startAlpha = currentColor.a;
+
+        while (time < duration)
+        {
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
+            image.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        image.color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
     }
 }
