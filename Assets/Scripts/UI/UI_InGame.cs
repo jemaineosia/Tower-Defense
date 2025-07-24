@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class UI_InGame : MonoBehaviour
 {
-
+    private UI ui;
+    private UI_Pause pauseUI;
     private UI_Animator uiAnimator;
 
     [SerializeField] private TextMeshProUGUI healthPointsText;
@@ -16,10 +17,14 @@ public class UI_InGame : MonoBehaviour
     private void Awake()
     {
         uiAnimator = GetComponentInParent<UI_Animator>();
-        if (uiAnimator == null)
-        {
-            Debug.LogError("UI_Animator component not found on UI_InGame.");
-        }
+        ui = GetComponentInParent<UI>();
+        pauseUI = ui.GetComponentInChildren<UI_Pause>(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            ui.SwitchTo(pauseUI.gameObject);
     }
 
     public void UpdateHealthPoints(int value, int maxHp)

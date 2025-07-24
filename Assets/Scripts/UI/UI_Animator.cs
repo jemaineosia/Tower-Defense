@@ -67,7 +67,7 @@ public class UI_Animator : MonoBehaviour
             float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
             image.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
 
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
 
