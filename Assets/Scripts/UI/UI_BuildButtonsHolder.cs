@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UI_BuildButtons : MonoBehaviour
+public class UI_BuildButtonsHolder : MonoBehaviour
 {
     private UI_Animator uiAnim;
     [SerializeField] private float yPositionOffset;
