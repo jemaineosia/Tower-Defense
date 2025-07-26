@@ -11,8 +11,11 @@ public class UI : MonoBehaviour
     private UI_MainMenu mainMenuUI;
     private UI_InGame inGameUI;
 
+    public UI_BuildButtons buildButtonsUI { get; private set; }
+
     private void Awake()
     {
+        buildButtonsUI = GetComponentInChildren<UI_BuildButtons>(true);
         settingsUI = GetComponentInChildren<UI_Settings>(true);
         mainMenuUI = GetComponentInChildren<UI_MainMenu>(true);
         inGameUI = GetComponentInChildren<UI_InGame>(true);
@@ -20,8 +23,8 @@ public class UI : MonoBehaviour
 
         //ActivateFadeEffect(true);
 
-        //SwitchTo(mainMenuUI.gameObject);
         SwitchTo(settingsUI.gameObject);
+        //SwitchTo(mainMenuUI.gameObject);
         SwitchTo(inGameUI.gameObject);
     }
 

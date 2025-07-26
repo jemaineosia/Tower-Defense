@@ -15,15 +15,9 @@ public class UI_BuildButtons : MonoBehaviour
         buildButtons = GetComponentsInChildren<UI_BuildButtonOnHoverEffect>();
     }
 
-    private void Update()
+    public void ShowBuildButtons(bool showButtons)
     {
-        if (Input.GetKeyDown(KeyCode.B))
-            ShowBuildButtons();
-    }
-
-    public void ShowBuildButtons()
-    {
-        isActive = !isActive;
+        isActive = showButtons;
 
         float yOffset = isActive ? yPositionOffset : -yPositionOffset;
         float methodDelay = isActive ? openAnimationDuration : 0;

@@ -10,7 +10,8 @@ public class TileSlot : MonoBehaviour
     private MeshRenderer meshRenderer => GetComponent<MeshRenderer>();
     private MeshFilter meshFilter => GetComponent<MeshFilter>();
     private Collider collider => GetComponent<Collider>();
-    private NavMeshSurface myNavMesh => GetComponentInParent<NavMeshSurface>();
+    private NavMeshSurface myNavMesh => GetComponentInParent<NavMeshSurface>(true);
+    private TileSetHolder tileSetHolder => GetComponentInParent<TileSetHolder>(true);
 
     public void SwitchTile(GameObject referenceTile)
     {
@@ -24,6 +25,8 @@ public class TileSlot : MonoBehaviour
         UpdateChildren(newTile);
         UpdateLayer(referenceTile);
         UpdateNavMesh();
+
+        TurnIntoBuildSlotIfNeeded(referenceTile);
     }
 
     private void UpdateNavMesh() => myNavMesh.BuildNavMesh();
@@ -52,6 +55,27 @@ public class TileSlot : MonoBehaviour
         }
         return children;
     }
+
+    private void TurnIntoBuildSlotIfNeeded(GameObject referenceTile)
+    {
+        BuildSlot buildSlot = GetComponent<BuildSlot>();
+
+        if (referenceTile != tileSetHolder.snowTile)
+        {
+            if (buildSlot != null)
+            {
+                DestroyImmediate(buildSlot);
+            }
+        }
+        else
+        {
+            if(buildSlot == null)
+            {
+                buildSlot = gameObject.AddComponent<BuildSlot>();
+            }
+        }
+    }
+
     public void UpdateCollider(Collider newCollider)
     {
         DestroyImmediate(collider);
