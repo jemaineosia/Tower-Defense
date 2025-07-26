@@ -28,7 +28,7 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    private void CancelBuildAction()
+    public void CancelBuildAction()
     {
         if (selectedBuildSlot == null)
             return;

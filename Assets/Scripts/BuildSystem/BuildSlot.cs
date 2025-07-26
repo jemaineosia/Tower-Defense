@@ -14,6 +14,7 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private bool tileCanBeMoved = true;
 
     private Coroutine currentMovementUpCo;
+    private Coroutine moveToDefaultCo;
 
     private void Awake()
     {
@@ -74,7 +75,17 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void MoveToDefaultPosition()
     {
-       tileAnim.MoveTile(transform, defaultPosition);
+        moveToDefaultCo = StartCoroutine(tileAnim.MoveTileCo(transform, defaultPosition));
         meshRenderer.material = defaultMaterial;
     }
+
+    public void SnapToDefaultPositionImmediately()
+    {
+        if(moveToDefaultCo != null)
+            StopCoroutine(moveToDefaultCo);
+
+        transform.position = defaultPosition;
+    }
+
+    public Vector3 GetBuildPosition(float yOffset) => defaultPosition + new Vector3(0, yOffset);
 }

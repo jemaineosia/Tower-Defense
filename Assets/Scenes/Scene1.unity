@@ -57417,6 +57417,17 @@ MonoBehaviour:
   adjustmentSpeed: 10
   showCaseY: 100
   defaultY: 60
+--- !u!114 &1747541790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3311758946426782100, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+  m_PrefabInstance: {fileID: 3850445380783800690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747541781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb48039c840c904b9670e3c51abc8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1753232648
 GameObject:
   m_ObjectHideFlags: 0
@@ -65369,7 +65380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acec63c2b8f41c141b8fcf06f84b0d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currency: 0
+  currency: 500
   maxHp: 100
   currentHp: 0
 --- !u!4 &2076087635
@@ -67596,6 +67607,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildButtonUI - Crossbow
       objectReference: {fileID: 0}
+    - target: {fileID: 3311758946426782100, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: towerCenterY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311758946426782100, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: towerToBuild
+      value: 
+      objectReference: {fileID: 3813815857571771730, guid: ae935d770bf01d741a114187fd084eaf, type: 3}
     - target: {fileID: 4621886036678973371, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -67675,6 +67694,34 @@ PrefabInstance:
     - target: {fileID: 4621886036678973371, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1747541790}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuildTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI_BuildButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336339217601391637, guid: a02affc3f04e0644e9761be63397d1a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
