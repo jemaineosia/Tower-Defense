@@ -27,6 +27,12 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         defaultMaterial = meshRenderer.material;
     }
 
+    private void Start()
+    {
+        if (buildSlotAvailable == false)
+            transform.position += new Vector3(0, .1f);
+    }
+
     public void SetSlotAvailableTo(bool value) => buildSlotAvailable = value;
 
     public void OnPointerDown(PointerEventData eventData)

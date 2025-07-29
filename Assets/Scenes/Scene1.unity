@@ -60926,6 +60926,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885779408}
   m_CullTransparentMesh: 1
+--- !u!1 &1888036691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888036693}
+  - component: {fileID: 1888036692}
+  m_Layer: 0
+  m_Name: '***LevelManager***'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1888036692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888036691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fdd7b68d3396c49af5adc19baacab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerUnlockDataList:
+  - towerName: Crossbow
+    isUnlocked: 0
+  - towerName: Cannon
+    isUnlocked: 0
+  - towerName: Rapid Fire Gun
+    isUnlocked: 0
+  - towerName: Hammer
+    isUnlocked: 0
+  - towerName: Spider Nest
+    isUnlocked: 0
+  - towerName: Anti-Air Harpon
+    isUnlocked: 0
+  - towerName: Just Fan
+    isUnlocked: 0
+--- !u!4 &1888036693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888036691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1905980585
 GameObject:
   m_ObjectHideFlags: 0
@@ -67738,6 +67797,7 @@ SceneRoots:
   - {fileID: 2076087635}
   - {fileID: 1071157697}
   - {fileID: 1082228486}
+  - {fileID: 1888036693}
   - {fileID: 1069827745}
   - {fileID: 626630282}
   - {fileID: 1585425349}
