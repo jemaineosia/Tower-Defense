@@ -31,6 +31,7 @@ public class UI_BuildButton : MonoBehaviour
         BuildSlot slotToUse = buildManager.selectedBuildSlot;
         buildManager.CancelBuildAction();
         slotToUse.SnapToDefaultPositionImmediately();
+        slotToUse.SetSlotAvailableTo(false);
         cameraEffects.Screenshake(.15f, .02f);
 
         GameObject newTower = Instantiate(towerToBuild, slotToUse.GetBuildPosition(towerCenterY), Quaternion.identity);

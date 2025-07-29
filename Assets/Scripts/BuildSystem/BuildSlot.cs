@@ -12,6 +12,7 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Material defaultMaterial;
 
     private bool tileCanBeMoved = true;
+    private bool buildSlotAvailable = true;
 
     private Coroutine currentMovementUpCo;
     private Coroutine moveToDefaultCo;
@@ -26,13 +27,15 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         defaultMaterial = meshRenderer.material;
     }
 
+    public void SetSlotAvailableTo(bool value) => buildSlotAvailable = value;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left || !tileCanBeMoved) 
-            return;
+        if(!buildSlotAvailable) return;
 
-        if (buildManager.GetSelectedSlot() == this)
-            return;
+        if (eventData.button != PointerEventData.InputButton.Left || !tileCanBeMoved) return;
+
+        if (buildManager.GetSelectedSlot() == this) return;
 
         buildManager.EnableBuildMenu();
         buildManager.SelectBuildSlot(this);
@@ -43,8 +46,10 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(!buildSlotAvailable) return;
+
         if (Input.GetKey(KeyCode.Mouse1) || Input.GetKey(KeyCode.Mouse2)) return;
-        
+
         if (!tileCanBeMoved) return;
 
         MoveTileUp();
@@ -52,6 +57,8 @@ public class BuildSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if(!buildSlotAvailable) return;
+
         if (!tileCanBeMoved) return;
 
         if (currentMovementUpCo != null)
