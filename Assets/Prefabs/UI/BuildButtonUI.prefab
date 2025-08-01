@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 8336339217601391637}
   - component: {fileID: 3311758946426782100}
   m_Layer: 5
-  m_Name: BuildButtonUI
+  m_Name: BuildButtonUI - Default Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,6 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb48039c840c904b9670e3c51abc8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerName: Default Tower
+  towerNameText: {fileID: 7239142445592897039}
+  price: 50
   towerToBuild: {fileID: 0}
   towerCenterY: 0.5
 --- !u!1 &1985304511766041902
@@ -566,7 +569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Crossbow
+  m_text: Default Tower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13f81ba30c3b2dc4b854b811f29845f3, type: 2}
   m_sharedMaterial: {fileID: 236216763684285613, guid: 13f81ba30c3b2dc4b854b811f29845f3, type: 2}

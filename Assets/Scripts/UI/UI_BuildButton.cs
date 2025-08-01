@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class UI_BuildButton : MonoBehaviour
@@ -6,6 +7,8 @@ public class UI_BuildButton : MonoBehaviour
     private CameraEffects cameraEffects;
     private GameManager gameManager;
 
+    [SerializeField] private string towerName = "Default Tower";
+    [SerializeField] private TextMeshProUGUI towerNameText;
     [SerializeField] private int price = 50;
     [SerializeField] private GameObject towerToBuild;
     [SerializeField] private float towerCenterY = 0.5f;
@@ -35,6 +38,12 @@ public class UI_BuildButton : MonoBehaviour
         cameraEffects.Screenshake(.15f, .02f);
 
         GameObject newTower = Instantiate(towerToBuild, slotToUse.GetBuildPosition(towerCenterY), Quaternion.identity);
+    }
+
+    private void OnValidate()
+    {
+        towerNameText.text = towerName;
+        gameObject.name = "BuildButtonUI - " + towerName;
     }
 
 }
